@@ -32,6 +32,10 @@ while True:
             pygame.quit()
             exit()
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                print("Jump")
+
         # Checking Collisions with event loops
         # if event.type == pygame.MOUSEMOTION:
         #     if player_rect.collidepoint(event.pos):
@@ -52,6 +56,11 @@ while True:
     # Added Player Models
     screen.blit(snail_surface, snail_rect)
     screen.blit(player_surf, player_rect)
+
+    # keyboard input
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_SPACE]:
+    #     print("jump")
 
     # Adding Collisions
     # if player_rect.colliderect(snail_rect):
