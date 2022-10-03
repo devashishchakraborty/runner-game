@@ -14,7 +14,7 @@ test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
 ground_surface = pygame.image.load("graphics/ground.png").convert()
 
-score_surf = test_font.render("My Game", False, "Black").convert()
+score_surf = test_font.render("My game", False, (64, 64, 64))
 score_rect = score_surf.get_rect(center=(400, 50))
 
 # Snail Surface and Rectangle
@@ -40,6 +40,9 @@ while True:
     # Displaying Background Images to the Display Surface
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
+
+    pygame.draw.rect(screen, "#c0e8ec", score_rect)
+    pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
     screen.blit(score_surf, score_rect)
 
     snail_rect.x -= 4
