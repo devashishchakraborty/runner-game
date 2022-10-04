@@ -1,6 +1,14 @@
 import pygame
 from sys import exit
 
+
+def display_score():
+    current_time = int((pygame.time.get_ticks() - start_time) / 1000)
+    score_surf = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
+    score_rect = score_surf.get_rect(center=(400, 50))
+    screen.blit(score_surf, score_rect)
+
+
 # Initialize Pygame
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
@@ -9,6 +17,8 @@ clock = pygame.time.Clock()
 
 # Font for Title
 test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
+
+start_time = 0
 game_active = True
 
 # Background Surfaces
@@ -46,15 +56,17 @@ while True:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 game_active = True
                 snail_rect.left = 800
+                start_time = pygame.time.get_ticks()
 
     if game_active:
         # Displaying Background Images to the Display Surface
         screen.blit(sky_surf, (0, 0))
         screen.blit(ground_surf, (0, 300))
 
-        pygame.draw.rect(screen, "#c0e8ec", score_rect)
-        pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
-        screen.blit(score_surf, score_rect)
+        display_score()
+        # pygame.draw.rect(screen, "#c0e8ec", score_rect)
+        # pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
+        # screen.blit(score_surf, score_rect)
 
         snail_rect.x -= 5
         if snail_rect.right < 0:
@@ -71,6 +83,8 @@ while True:
         # Collision
         if snail_rect.colliderect(player_rect):
             game_active = False
+    else:
+        screen.fill("Yellow")
 
     pygame.display.update()
     clock.tick(60)
